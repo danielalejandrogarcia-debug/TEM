@@ -77,24 +77,7 @@ git push -u origin main
 
 Si no quieres usar la terminal, en la página del repositorio puedes elegir **Add file → Upload files** y arrastrar el contenido de la carpeta (que `index.html` quede en la raíz).
 
-## Cómo publicarlo con GitHub Pages (el link para el profe)
 
-1. En el repositorio entra a **Settings → Pages**.
-2. En **Source** elige **Deploy from a branch**, rama `main` y carpeta `/ (root)`. Guarda.
-3. En uno o dos minutos el sitio queda en:
-   `https://TU-USUARIO.github.io/tarragona-eventos-manager/`
-
-Cada vez que hagas `git push`, el sitio se actualiza solo.
-
-## Pruebas
-
-Con Node.js instalado:
-
-```bash
-node pruebas/pruebas.js
-```
-
-Sin Node.js, abre `pruebas/pruebas.html` en el navegador. Los resultados sirven para llenar la columna "Obtenido" de la Tabla 2 del informe.
 
 ## Datos y límites conocidos
 
