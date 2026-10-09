@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="oscuro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel | Tarragona Eventos Manager</title>
+  <meta name="description" content="Registra fiestas, consulta el listado del mes y revisa el resumen de cobros.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/panel.css">
+</head>
+<body>
+  <!-- Íconos reutilizables -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-papelera" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></symbol>
+    <symbol id="i-mas" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-reiniciar" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></symbol>
+    <symbol id="i-usuarios" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14a6.5 6.5 0 0 1 3.5 6"/></symbol>
+    <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-calculadora" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2M16 12v4"/></symbol>
+    <symbol id="i-calendario" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-fiesta" viewBox="0 0 24 24"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></symbol>
+    <symbol id="i-cartera" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></symbol>
+    <symbol id="i-grafico" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></symbol>
+  </svg>
+
+  <header class="encabezado">
+    <div class="encabezado-interno">
+      <div class="marca">
+        <span class="logo" aria-hidden="true">TEM</span>
+        <span class="marca-nombre">Tarragona Eventos Manager</span>
+      </div>
+      <nav class="navegacion" aria-label="Pantallas">
+        <button type="button" data-vista="registrar" aria-current="page">Registrar fiesta</button>
+        <button type="button" data-vista="fiestas">Fiestas del mes</button>
+        <button type="button" data-vista="resumen">Resumen</button>
+      </nav>
+      <div class="sesion">
+        <span class="usuario">Hola, <strong id="nombre-usuario"></strong></span>
+        <button type="button" class="boton-encabezado" id="boton-tema">Tema claro</button>
+        <button type="button" class="boton-encabezado" id="boton-salir">Cerrar sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="contenido">
+
+    <!-- PANTALLA 1: Registrar fiesta -->
+    <section id="vista-registrar" aria-labelledby="titulo-registrar">
+      <p class="etiqueta">Operación diaria</p>
+      <h1 class="titulo-vista" id="titulo-registrar">Registrar fiesta</h1>
+      <p class="subtitulo">Ingresa los datos del evento y confirma el cobro antes de guardarlo.</p>
+
+      <div class="columnas">
+        <form class="tarjeta" id="formulario-fiesta" novalidate>
+          <h2>Datos de la fiesta</h2>
+          <p class="ayuda tarjeta-subtitulo">Completa los datos para calcular y registrar el cobro.</p>
+
+          <div class="campo">
+            <label for="campo-cedula">Cédula</label>
+            <input id="campo-cedula" name="cedula" inputmode="numeric" autocomplete="off" placeholder="Ej. 1144098765" aria-describedby="ayuda-cedula error-cedula">
+            <span class="ayuda" id="ayuda-cedula">6 a 10 dígitos</span>
+            <span class="error" id="error-cedula" role="alert"></span>
+          </div>
+          <div class="campo">
+            <label for="campo-invitados">Cantidad de invitados</label>
+            <input id="campo-invitados" name="invitados" inputmode="numeric" autocomplete="off" placeholder="Ej. 150" aria-describedby="error-invitados">
+            <span class="error" id="error-invitados" role="alert"></span>
+          </div>
+          <div class="campo">
+            <label for="campo-horas">Horas de duración</label>
+            <input id="campo-horas" name="horas" inputmode="numeric" autocomplete="off" placeholder="Ej. 5" aria-describedby="ayuda-horas error-horas">
+            <span class="ayuda" id="ayuda-horas">1 a 24, horas completas</span>
+            <span class="error" id="error-horas" role="alert"></span>
+          </div>
+
+          <div class="acciones">
+            <button class="boton boton-principal" type="submit"><svg class="icono" aria-hidden="true"><use href="#i-mas"/></svg>Agregar fiesta</button>
+            <button class="boton boton-secundario" type="button" id="boton-limpiar"><svg class="icono" aria-hidden="true"><use href="#i-reiniciar"/></svg>Limpiar</button>
+          </div>
+          <p class="aviso" id="aviso-registro" role="status" hidden></p>
+        </form>
+
+        <aside class="tarjeta" aria-live="polite">
+          <div class="tarjeta-cabecera">
+            <div>
+              <h2>Cobro de esta fiesta</h2>
+              <p class="ayuda">Cálculo en tiempo real</p>
+            </div>
+            <span class="icono-caja"><svg class="icono" aria-hidden="true"><use href="#i-calculadora"/></svg></span>
+          </div>
+          <dl class="lista-cobro">
+            <div class="fila-cobro">
+              <dt>Tarifa por invitado<small id="cobro-valor-detalle"></small></dt>
+              <dd id="cobro-valor">—</dd>
+            </div>
+            <div class="fila-cobro">
+              <dt>Subtotal<small id="cobro-subtotal-detalle"></small></dt>
+              <dd id="cobro-subtotal">—</dd>
+            </div>
+            <div class="fila-cobro">
+              <dt>Cuota por horas<small id="cobro-cuota-detalle"></small></dt>
+              <dd id="cobro-cuota">—</dd>
+            </div>
+          </dl>
+          <div class="total-cobro">
+            <span>TOTAL<small>Subtotal + cuota</small></span>
+            <strong id="cobro-total">$0</strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PANTALLA 2: Fiestas del mes -->
+    <section id="vista-fiestas" aria-labelledby="titulo-fiestas" hidden>
+      <div class="cabecera-vista">
+        <div>
+          <p class="etiqueta">Control mensual</p>
+          <h1 class="titulo-vista" id="titulo-fiestas">Fiestas del mes</h1>
+          <p class="subtitulo">Consulta cada registro, su rango de horas y el monto calculado.</p>
+        </div>
+        <div class="cabecera-acciones">
+          <span class="pastilla"><svg class="icono" aria-hidden="true"><use href="#i-calendario"/></svg><span id="contador-fiestas">0 fiestas registradas</span></span>
+          <button type="button" class="boton boton-secundario boton-chico" id="boton-vaciar" hidden>Vaciar lista</button>
+        </div>
+      </div>
+
+      <div class="caja-tabla" id="caja-tabla">
+        <table>
+          <thead>
+            <tr><th>Cédula</th><th>Invitados</th><th>Horas</th><th>Rango</th><th>Monto</th><th>Eliminar</th></tr>
+          </thead>
+          <tbody id="cuerpo-tabla"></tbody>
+        </table>
+      </div>
+
+      <div class="tarjeta vacio" id="lista-vacia" hidden>
+        <h2>Aún no hay fiestas registradas este mes</h2>
+        <p class="ayuda">Registra la primera o carga tres fiestas de ejemplo para ver cómo funciona.</p>
+        <div class="acciones acciones-centradas">
+          <button type="button" class="boton boton-principal" data-ir="registrar">Registrar la primera</button>
+          <button type="button" class="boton boton-secundario" id="boton-ejemplos">Cargar datos de ejemplo</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 3: Resumen -->
+    <section id="vista-resumen" aria-labelledby="titulo-resumen" hidden>
+      <p class="etiqueta">Vista general</p>
+      <h1 class="titulo-vista" id="titulo-resumen">Resumen</h1>
+      <p class="subtitulo">Un panorama directo de la actividad y los cobros del mes.</p>
+
+      <div class="cifras">
+        <article class="cifra">
+          <div class="cifra-cabecera"><span>FIESTAS</span><span class="icono-caja"><svg class="icono" aria-hidden="true"><use href="#i-fiesta"/></svg></span></div>
+          <strong id="cifra-fiestas">0</strong>
+          <small>Registros del mes</small>
+        </article>
+        <article class="cifra">
+          <div class="cifra-cabecera"><span>INVITADOS</span><span class="icono-caja"><svg class="icono" aria-hidden="true"><use href="#i-usuarios"/></svg></span></div>
+          <strong id="cifra-invitados">0</strong>
+          <small>Suma de asistentes</small>
+        </article>
+        <article class="cifra">
+          <div class="cifra-cabecera"><span>HORAS</span><span class="icono-caja"><svg class="icono" aria-hidden="true"><use href="#i-reloj"/></svg></span></div>
+          <strong id="cifra-horas">0</strong>
+          <small>Duración acumulada</small>
+        </article>
+        <article class="cifra">
+          <div class="cifra-cabecera"><span>TOTAL A COBRAR</span><span class="icono-caja"><svg class="icono" aria-hidden="true"><use href="#i-cartera"/></svg></span></div>
+          <strong class="cifra-dinero" id="cifra-total">$0</strong>
+          <small>Monto del mes</small>
+        </article>
+      </div>
+
+      <div class="columnas-resumen">
+        <article class="tarjeta">
+          <div class="tarjeta-cabecera">
+            <div>
+              <h2>Fiestas por rango de horas</h2>
+              <p class="ayuda" id="grafico-subtitulo"></p>
+            </div>
+            <span class="leyenda"><i aria-hidden="true"></i>Fiestas</span>
+          </div>
+          <div class="grafico" id="grafico-barras" role="img" aria-label="Fiestas por rango de horas"></div>
+        </article>
+        <aside class="tarjeta lectura">
+          <span class="icono-caja"><svg class="icono" aria-hidden="true"><use href="#i-grafico"/></svg></span>
+          <p class="etiqueta">Lectura del mes</p>
+          <h2 id="lectura-titulo"></h2>
+          <p class="ayuda" id="lectura-detalle"></p>
+          <div class="lectura-barras" id="lectura-barras" aria-hidden="true"><span></span><span></span><span></span></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Reglas de cobro (visible en todas las pantallas) -->
+    <section class="reglas" aria-label="Reglas de cobro">
+      <h2>Reglas de cobro</h2>
+      <div class="reglas-grilla">
+        <div>
+          <p class="regla-titulo"><svg class="icono" aria-hidden="true"><use href="#i-usuarios"/></svg>Valor por invitado</p>
+          <p class="regla-detalle">1–100 = $8.000 · 101–500 = $6.000 · +500 = $4.000</p>
+        </div>
+        <div>
+          <p class="regla-titulo"><svg class="icono" aria-hidden="true"><use href="#i-reloj"/></svg>Cuota por duración</p>
+          <p class="regla-detalle">1–3 h = $100.000 · 4–6 h = $200.000 · +6 h = $300.000</p>
+        </div>
+        <div>
+          <p class="regla-titulo"><svg class="icono" aria-hidden="true"><use href="#i-calculadora"/></svg>Fórmula</p>
+          <p class="regla-detalle">Monto = invitados × valor + cuota</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/calculo.js"></script>
+  <script src="js/almacenamiento.js"></script>
+  <script src="js/autenticacion.js"></script>
+  <script src="js/panel.js"></script>
+</body>
+</html>

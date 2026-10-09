@@ -1,0 +1,128 @@
+/* ============================================================
+   estilos.css: variables de diseño y componentes compartidos
+   Paleta tomada del prototipo de Figma (tema oscuro por defecto).
+   El tema claro se activa con data-tema="claro" en <html>.
+   ============================================================ */
+
+:root {
+  --fuente-titulo: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --fuente-texto: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+
+  --fondo: #0B1020;
+  --tarjeta: #151D36;
+  --tarjeta-2: #1D2745;
+  --borde: #2A3558;
+  --texto: #E8ECF6;
+  --apagado: #9AA5C2;
+  --acento: #F2A93B;
+  --acento-texto: #F2A93B;
+  --sobre-acento: #14213D;
+  --ok: #5FD3B0;
+  --ok-fondo: #12372D;
+  --error: #FF8A82;
+  --error-fondo: #43201E;
+
+  --encabezado: #14213D;
+  --encabezado-texto: #E8ECF6;
+  --encabezado-apagado: #B5BFDA;
+
+  --radio: 12px;
+  color-scheme: dark;
+}
+
+:root[data-tema="claro"] {
+  --fondo: #F4F6FA;
+  --tarjeta: #FFFFFF;
+  --tarjeta-2: #EDF0F7;
+  --borde: #DDE2EC;
+  --texto: #1B2233;
+  --apagado: #59627A;
+  --acento-texto: #8A5200;
+  --ok: #1B7F66;
+  --ok-fondo: #DDF2EB;
+  --error: #B83A33;
+  --error-fondo: #FBE4E2;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--fondo);
+  color: var(--texto);
+  font: 400 15px/1.55 var(--fuente-texto);
+}
+
+h1, h2, h3 { margin: 0; font-family: var(--fuente-titulo); line-height: 1.15; text-wrap: balance; }
+h2 { font-size: 20px; font-weight: 600; }
+p { margin: 0; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+:focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; }
+
+.icono {
+  width: 18px; height: 18px; flex: none;
+  stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* ---------- Marca ---------- */
+.marca { display: flex; align-items: center; gap: 12px; font: 700 18px var(--fuente-titulo); color: var(--encabezado-texto); }
+.logo {
+  width: 36px; height: 36px; flex: none;
+  display: grid; place-items: center;
+  border: 1.5px solid var(--acento); border-radius: 8px;
+  color: var(--acento); font: 800 12px var(--fuente-titulo); letter-spacing: .02em;
+}
+
+/* ---------- Tarjetas ---------- */
+.tarjeta {
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  padding: 24px;
+  min-width: 0;
+}
+
+/* ---------- Formularios ---------- */
+.campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+label { font-weight: 700; font-size: 14px; }
+input[type="text"], input[type="password"], input:not([type]) {
+  width: 100%;
+  background: var(--fondo);
+  color: var(--texto);
+  border: 1.5px solid var(--borde);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+input::placeholder { color: var(--apagado); opacity: .7; }
+input:focus { border-color: var(--acento); outline: none; box-shadow: 0 0 0 3px rgba(242, 169, 59, .3); }
+input[aria-invalid="true"] { border-color: var(--error); }
+.ayuda { color: var(--apagado); font-size: 13px; }
+.error { color: var(--error); font-size: 13px; }
+.error:empty { display: none; }
+.casilla { display: flex; align-items: center; gap: 8px; font-weight: 400; font-size: 14px; color: var(--apagado); margin-bottom: 16px; cursor: pointer; }
+.casilla input { width: 16px; height: 16px; accent-color: var(--acento); }
+
+/* ---------- Botones ---------- */
+.boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border-radius: 10px; padding: 11px 18px; font-weight: 700; border: 1.5px solid transparent;
+  transition: filter .15s, background .15s;
+}
+.boton-principal { background: var(--acento); color: var(--sobre-acento); }
+.boton-principal:hover { filter: brightness(1.07); }
+.boton-secundario { background: transparent; color: var(--texto); border-color: var(--borde); }
+.boton-secundario:hover { background: var(--tarjeta-2); }
+.boton-peligro { background: transparent; color: var(--error); border-color: var(--error); }
+.boton-peligro:hover, .boton-peligro-activo { background: var(--error-fondo); }
+.boton-chico { padding: 6px 12px; font-size: 13px; }
+.boton-ancho { width: 100%; }
+
+.aviso { margin-top: 16px; padding: 10px 14px; border-radius: 10px; background: var(--ok-fondo); color: var(--ok); font-weight: 500; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

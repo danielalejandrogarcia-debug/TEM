@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="oscuro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ingresar | Tarragona Eventos Manager</title>
+  <meta name="description" content="Ingresa a Tarragona Eventos Manager para registrar fiestas y calcular su cobro.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="pagina-login">
+  <main class="login">
+    <section class="login-marca" aria-label="Presentación">
+      <div class="marca">
+        <span class="logo" aria-hidden="true">TEM</span>
+        <span>Tarragona Eventos Manager</span>
+      </div>
+      <h1>Cobra cada fiesta sin errores de cálculo.</h1>
+      <p class="login-descripcion">Registra la cédula, los invitados y las horas de cada evento. TEM calcula el monto a cancelar y arma el resumen del mes.</p>
+      <ul class="login-lista">
+        <li>Cobro calculado mientras escribes</li>
+        <li>Listado de las fiestas del mes</li>
+        <li>Resumen por rango de horas</li>
+      </ul>
+    </section>
+
+    <section class="login-caja" aria-label="Acceso">
+      <div class="tarjeta login-tarjeta">
+        <div class="pestanas" role="tablist" aria-label="Acceso a la cuenta">
+          <button type="button" role="tab" data-pestana="ingreso" aria-selected="true">Iniciar sesión</button>
+          <button type="button" role="tab" data-pestana="crear" aria-selected="false">Crear cuenta</button>
+        </div>
+
+        <form id="formulario-ingreso" novalidate>
+          <h2>Bienvenido</h2>
+          <p class="ayuda">Ingresa con tu usuario y contraseña.</p>
+          <div class="campo">
+            <label for="ingreso-usuario">Usuario</label>
+            <input id="ingreso-usuario" name="usuario" autocomplete="username" autocapitalize="none" spellcheck="false">
+          </div>
+          <div class="campo">
+            <label for="ingreso-contrasena">Contraseña</label>
+            <input id="ingreso-contrasena" name="contrasena" type="password" autocomplete="current-password">
+          </div>
+          <label class="casilla"><input type="checkbox" data-mostrar="ingreso-contrasena"> Mostrar contraseña</label>
+          <p class="error" id="error-ingreso" role="alert"></p>
+          <button class="boton boton-principal boton-ancho" type="submit">Ingresar</button>
+        </form>
+
+        <form id="formulario-crear" novalidate hidden>
+          <h2>Crear cuenta</h2>
+          <p class="ayuda">Solo necesitas un usuario y una contraseña.</p>
+          <div class="campo">
+            <label for="crear-usuario">Usuario</label>
+            <input id="crear-usuario" name="usuario" autocomplete="username" autocapitalize="none" spellcheck="false" aria-describedby="error-crear-usuario">
+            <span class="ayuda">De 3 a 20 caracteres: letras, números o guion bajo.</span>
+            <span class="error" id="error-crear-usuario" role="alert"></span>
+          </div>
+          <div class="campo">
+            <label for="crear-contrasena">Contraseña</label>
+            <input id="crear-contrasena" name="contrasena" type="password" autocomplete="new-password" aria-describedby="error-crear-contrasena">
+            <span class="ayuda">Mínimo 4 caracteres.</span>
+            <span class="error" id="error-crear-contrasena" role="alert"></span>
+          </div>
+          <div class="campo">
+            <label for="crear-repetir">Repetir contraseña</label>
+            <input id="crear-repetir" name="repetir" type="password" autocomplete="new-password" aria-describedby="error-crear-repetir">
+            <span class="error" id="error-crear-repetir" role="alert"></span>
+          </div>
+          <label class="casilla"><input type="checkbox" data-mostrar="crear-contrasena,crear-repetir"> Mostrar contraseñas</label>
+          <button class="boton boton-principal boton-ancho" type="submit">Crear cuenta</button>
+        </form>
+
+        <p class="nota-pie">Las cuentas y las fiestas se guardan solo en este navegador.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/almacenamiento.js"></script>
+  <script src="js/autenticacion.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>
