@@ -5,6 +5,12 @@ Aplicación web para registrar las fiestas de la compañía Tarragona, calcular 
 Proyecto de la asignatura **Diseño de Interfaces de Usuario** (Universidad del Valle).
 Autor: Daniel Alejandro García Chamorro.
 
+## Ver la aplicación
+👉 https://danielalejandrogarcia-debug.github.io/TEM/
+
+Para probarla: en "Crear cuenta" escribe cualquier usuario y contraseña
+y, en "Fiestas del mes", pulsa "Cargar datos de ejemplo".
+
 ## Qué hace
 
 - **Login simple:** crear cuenta e iniciar sesión con usuario y contraseña.
