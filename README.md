@@ -60,24 +60,6 @@ tarragona-eventos-manager/
 
 También funciona abriendo `index.html` con doble clic en el navegador.
 
-## Cómo subirlo a GitHub
-
-1. Crea una cuenta en <https://github.com> si no tienes.
-2. Crea un repositorio nuevo, **público**, llamado `tarragona-eventos-manager` (sin README ni .gitignore, porque ya vienen en el proyecto).
-3. Abre la terminal en la carpeta del proyecto (en VS Code: **Terminal → Nueva terminal**) y ejecuta, cambiando `TU-USUARIO`:
-
-```bash
-git init
-git add .
-git commit -m "Primera versión de Tarragona Eventos Manager"
-git branch -M main
-git remote add origin https://github.com/TU-USUARIO/tarragona-eventos-manager.git
-git push -u origin main
-```
-
-Si no quieres usar la terminal, en la página del repositorio puedes elegir **Add file → Upload files** y arrastrar el contenido de la carpeta (que `index.html` quede en la raíz).
-
-
 
 ## Datos y límites conocidos
 
